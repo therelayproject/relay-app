@@ -5,6 +5,8 @@ import 'package:go_router/go_router.dart';
 import '../../../../app/theme/color_palette.dart';
 import '../../../../core/utils/date_formatter.dart';
 import '../../../../shared/widgets/relay_avatar.dart';
+import '../../../files/presentation/widgets/file_download_button.dart';
+import '../../../files/presentation/widgets/inline_image_viewer.dart';
 import '../../domain/models/message.dart';
 import 'reaction_bar.dart';
 
@@ -89,6 +91,35 @@ class MessageBubble extends ConsumerWidget {
                     message.text,
                     style: theme.textTheme.bodyLarge,
                   ),
+
+                  // Attachments (FILE-02/03)
+                  if (message.attachments.isNotEmpty)
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: RelayColors.spacingXs),
+                      child: Wrap(
+                        spacing: RelayColors.spacingXs,
+                        runSpacing: RelayColors.spacingXs,
+                        children: message.attachments.map((att) {
+                          if (att.mimeType.startsWith('image/')) {
+                            return InlineImageViewer(
+                              imageUrl: att.url,
+                              fileName: att.name,
+                              thumbnailWidth:
+                                  att.imageWidth?.toDouble() ?? 240,
+                              thumbnailHeight:
+                                  att.imageHeight?.toDouble() ?? 180,
+                            );
+                          }
+                          return FileDownloadButton(
+                            name: att.name,
+                            mimeType: att.mimeType,
+                            url: att.url,
+                            sizeBytes: att.sizeBytes,
+                          );
+                        }).toList(),
+                      ),
+                    ),
 
                   // Reactions
                   if (message.reactions.isNotEmpty)

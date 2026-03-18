@@ -16,6 +16,8 @@ import '../features/channels/presentation/screens/channel_feed_screen.dart';
 import '../features/channels/presentation/screens/channel_settings_screen.dart';
 import '../features/dm/presentation/screens/dm_screen.dart';
 import '../features/messages/presentation/screens/thread_panel_screen.dart';
+import '../features/notifications/presentation/screens/notification_preferences_screen.dart';
+import '../features/search/presentation/screens/search_screen.dart';
 import '../features/workspaces/presentation/providers/workspace_provider.dart';
 import '../features/workspaces/presentation/screens/workspace_create_screen.dart';
 import '../features/workspaces/presentation/screens/workspace_settings_screen.dart';
@@ -169,9 +171,14 @@ GoRouter router(Ref ref) {
           GoRoute(
             path: '/app/search',
             name: 'search',
-            builder: (context, state) => const _PlaceholderScreen(
-              label: 'Search',
-            ),
+            builder: (context, state) => const SearchScreen(),
+          ),
+
+          GoRoute(
+            path: '/app/notifications',
+            name: 'notifications',
+            builder: (context, state) =>
+                const NotificationPreferencesScreen(),
           ),
 
           GoRoute(
@@ -185,14 +192,3 @@ GoRouter router(Ref ref) {
   );
 }
 
-// Placeholder screens for routes implemented in later tasks (REL-21)
-class _PlaceholderScreen extends StatelessWidget {
-  const _PlaceholderScreen({required this.label});
-  final String label;
-
-  @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(title: Text(label)),
-        body: Center(child: Text(label)),
-      );
-}

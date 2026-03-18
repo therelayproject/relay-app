@@ -37,6 +37,7 @@ abstract final class WsEventType {
   static const String userTyping = 'user.typing';
   static const String channelMemberJoined = 'channel.member_joined';
   static const String notificationPush = 'notification.push';
+  static const String notificationCreated = 'notification.created';
 }
 
 // ── Client ───────────────────────────────────────────────────────────────────

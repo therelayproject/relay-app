@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../app/theme/color_palette.dart';
 import '../../../../core/utils/debouncer.dart';
+import '../../../files/presentation/widgets/file_picker_sheet.dart';
 import '../providers/messages_provider.dart';
 import '../providers/typing_provider.dart';
 import '../sheets/emoji_picker_sheet.dart';
@@ -57,6 +58,12 @@ class _MessageComposerState extends ConsumerState<MessageComposer> {
         .sendMessage(text);
   }
 
+  Future<void> _openFilePicker() async {
+    await FilePickerSheet.show(context, channelId: widget.channelId);
+    // Uploaded files are attached to the next sendMessage call via
+    // fileUploadQueueProvider; the queue is cleared after attachment.
+  }
+
   void _openEmojiPicker() {
     EmojiPickerSheet.show(
       context,
@@ -96,9 +103,7 @@ class _MessageComposerState extends ConsumerState<MessageComposer> {
           // Attachment button (FILE-01)
           IconButton(
             icon: const Icon(Icons.attach_file),
-            onPressed: () {
-              // File picker — wired in REL-21 (FILE feature)
-            },
+            onPressed: () => _openFilePicker(),
             tooltip: 'Attach file',
           ),
 

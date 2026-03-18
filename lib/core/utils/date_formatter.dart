@@ -22,4 +22,8 @@ abstract final class DateFormatter {
   /// Full date/time for tooltips (e.g. "March 17, 2026 at 2:34 PM").
   static String full(DateTime dt, {String locale = 'en'}) =>
       DateFormat.yMMMMd(locale).add_jm().format(dt.toLocal());
+
+  /// Short date only (e.g. "Mar 17, 2026") — used in search filters.
+  static String dateOnly(DateTime dt, {String locale = 'en'}) =>
+      DateFormat.yMMMd(locale).format(dt);
 }

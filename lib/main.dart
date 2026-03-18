@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:window_manager/window_manager.dart';
-import 'package:flutter/foundation.dart';
 
 import 'app/app.dart';
 import 'core/config/app_config.dart';
+import 'services/push_notification_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,6 +21,13 @@ Future<void> main() async {
   }
 
   AppConfig.init();
+
+  // Initialise push notifications (mobile/web only).
+  if (!kIsWeb &&
+      (defaultTargetPlatform == TargetPlatform.android ||
+          defaultTargetPlatform == TargetPlatform.iOS)) {
+    await PushNotificationService.instance.init();
+  }
 
   runApp(
     const ProviderScope(

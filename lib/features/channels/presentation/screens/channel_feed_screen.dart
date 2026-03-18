@@ -4,10 +4,12 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../app/theme/color_palette.dart';
 import '../../../../shared/widgets/typing_indicator.dart';
+import '../../../../shared/widgets/unread_badge.dart';
 import '../../../messages/presentation/providers/messages_provider.dart';
 import '../../../messages/presentation/providers/typing_provider.dart';
 import '../../../messages/presentation/widgets/message_bubble.dart';
 import '../../../messages/presentation/widgets/message_composer.dart';
+import '../../../notifications/presentation/providers/notifications_provider.dart';
 
 class ChannelFeedScreen extends ConsumerWidget {
   const ChannelFeedScreen({
@@ -77,8 +79,29 @@ class _ChannelView extends ConsumerWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.search),
-            onPressed: () {},
-            tooltip: 'Search in channel',
+            onPressed: () => context.push('/app/search'),
+            tooltip: 'Search',
+          ),
+          Consumer(
+            builder: (context, ref, _) {
+              final unread = ref.watch(unreadNotificationCountProvider);
+              return Stack(
+                alignment: Alignment.topRight,
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.notifications_outlined),
+                    onPressed: () => context.push('/app/notifications'),
+                    tooltip: 'Notifications',
+                  ),
+                  if (unread > 0)
+                    Positioned(
+                      top: 8,
+                      right: 8,
+                      child: UnreadBadge(count: unread),
+                    ),
+                ],
+              );
+            },
           ),
           IconButton(
             icon: const Icon(Icons.info_outline),

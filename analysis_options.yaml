@@ -1,0 +1,27 @@
+include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    # Style
+    always_declare_return_types: true
+    prefer_single_quotes: true
+    sort_pub_dependencies: true
+
+    # Safety
+    avoid_dynamic_calls: true
+    cancel_subscriptions: true
+    close_sinks: true
+    unawaited_futures: true
+
+    # Riverpod
+    avoid_manual_providers_as_generated_provider_dependency: false
+
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+    - lib/core/db/app_database.g.dart
+
+  errors:
+    missing_required_param: error
+    missing_return: error
