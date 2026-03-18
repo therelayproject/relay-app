@@ -111,7 +111,6 @@ void main() {
       final container = _makeContainer(ws: ws);
 
       // Await initial load.
-      final notifier = container.read(messageListProvider(channelId: 'ch-1').notifier);
       await container.read(messageListProvider(channelId: 'ch-1').future);
 
       // Emit a WS event for this channel.
