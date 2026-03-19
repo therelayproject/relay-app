@@ -52,7 +52,7 @@ class _WorkspaceSettingsScreenState
       final updated = await ref.read(
         updateWorkspaceProvider(
           workspaceId: widget.workspaceId,
-          name: _nameCtrl.text.trim(),
+          workspaceName: _nameCtrl.text.trim(),
           domain: _domainCtrl.text.trim().isEmpty
               ? null
               : _domainCtrl.text.trim(),

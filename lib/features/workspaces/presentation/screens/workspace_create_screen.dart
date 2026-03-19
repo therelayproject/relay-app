@@ -34,7 +34,7 @@ class _WorkspaceCreateScreenState
     });
     try {
       final ws = await ref.read(
-        createWorkspaceProvider(name: _nameCtrl.text.trim()).future,
+        createWorkspaceProvider(workspaceName: _nameCtrl.text.trim()).future,
       );
       ref.read(currentWorkspaceProvider.notifier).select(ws);
       if (mounted) context.go('/app/${ws.id}');

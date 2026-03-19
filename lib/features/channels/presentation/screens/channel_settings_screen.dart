@@ -57,7 +57,7 @@ class _ChannelSettingsScreenState
         updateChannelProvider(
           workspaceId: widget.workspaceId,
           channelId: widget.channel.id,
-          name: _nameCtrl.text.trim(),
+          channelName: _nameCtrl.text.trim(),
           topic: _topicCtrl.text.trim().isEmpty ? null : _topicCtrl.text.trim(),
           purpose:
               _purposeCtrl.text.trim().isEmpty ? null : _purposeCtrl.text.trim(),

@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../app/theme/color_palette.dart';
-import '../../../../workspaces/presentation/providers/workspace_provider.dart';
+import '../../../workspaces/presentation/providers/workspace_provider.dart';
 import '../../domain/models/channel.dart';
 import '../providers/channels_provider.dart';
 

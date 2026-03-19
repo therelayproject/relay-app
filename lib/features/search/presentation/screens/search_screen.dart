@@ -52,14 +52,16 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
           autofocus: true,
           decoration: InputDecoration(
             hintText: 'Search messages…',
-            border: InputBorder.none,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(RelayColors.radiusMd),
+              borderSide: BorderSide.none,
+            ),
             filled: true,
             fillColor: Theme.of(context).colorScheme.surfaceContainerHighest,
             contentPadding: const EdgeInsets.symmetric(
               horizontal: RelayColors.spacingMd,
               vertical: RelayColors.spacingSm,
             ),
-            borderRadius: BorderRadius.circular(RelayColors.radiusMd),
           ),
         ),
         actions: [

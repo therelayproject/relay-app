@@ -29,13 +29,13 @@ class CurrentWorkspace extends _$CurrentWorkspace {
 @riverpod
 Future<Workspace> createWorkspace(
   Ref ref, {
-  required String name,
+  required String workspaceName,
   String? domain,
 }) async {
   final dio = ref.watch(httpClientProvider);
   final response = await dio.post<Map<String, dynamic>>(
     '/workspaces',
-    data: {'name': name, if (domain != null) 'domain': domain},
+    data: {'name': workspaceName, if (domain != null) 'domain': domain},
   );
   final workspace = Workspace.fromJson(response.data!);
   ref.invalidate(workspaceListProvider);
@@ -46,14 +46,14 @@ Future<Workspace> createWorkspace(
 Future<Workspace> updateWorkspace(
   Ref ref, {
   required String workspaceId,
-  String? name,
+  String? workspaceName,
   String? domain,
 }) async {
   final dio = ref.watch(httpClientProvider);
   final response = await dio.patch<Map<String, dynamic>>(
     '/workspaces/$workspaceId',
     data: {
-      if (name != null) 'name': name,
+      if (workspaceName != null) 'name': workspaceName,
       if (domain != null) 'domain': domain,
     },
   );

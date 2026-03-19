@@ -17,11 +17,11 @@ sealed class ApiException implements Exception {
       404 => NotFoundException(msg),
       429 => RateLimitException(msg),
       500 || 502 || 503 => ServerException(msg, statusCode!),
-      _ => when(e.type == DioExceptionType.connectionTimeout ||
+      _ => (e.type == DioExceptionType.connectionTimeout ||
               e.type == DioExceptionType.receiveTimeout ||
               e.type == DioExceptionType.sendTimeout)
           ? const TimeoutException()
-          : when(e.type == DioExceptionType.connectionError)
+          : e.type == DioExceptionType.connectionError
               ? const NetworkException()
               : UnknownApiException(msg),
     };

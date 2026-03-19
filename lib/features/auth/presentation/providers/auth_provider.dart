@@ -138,7 +138,7 @@ class ProfileUpdate extends _$ProfileUpdate {
     state = const AsyncLoading();
     final ds = ref.read(authRemoteDataSourceProvider);
     state = await AsyncValue.guard(() async {
-      final updated = await ds.updateProfile(
+      await ds.updateProfile(
         displayName: displayName,
         avatarUrl: avatarUrl,
         statusText: statusText,
@@ -147,7 +147,6 @@ class ProfileUpdate extends _$ProfileUpdate {
       );
       // Refresh auth state so router + UI pick up updated user.
       ref.invalidate(authStateProvider);
-      return updated;
     });
   }
 }

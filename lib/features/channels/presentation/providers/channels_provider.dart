@@ -53,7 +53,7 @@ Future<Channel> updateChannel(
   Ref ref, {
   required String workspaceId,
   required String channelId,
-  String? name,
+  String? channelName,
   String? topic,
   String? purpose,
 }) async {
@@ -61,7 +61,7 @@ Future<Channel> updateChannel(
   final response = await dio.patch<Map<String, dynamic>>(
     '/workspaces/$workspaceId/channels/$channelId',
     data: {
-      if (name != null) 'name': name,
+      if (channelName != null) 'name': channelName,
       if (topic != null) 'topic': topic,
       if (purpose != null) 'purpose': purpose,
     },
