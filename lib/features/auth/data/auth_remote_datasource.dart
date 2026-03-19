@@ -43,7 +43,7 @@ class AuthRemoteDataSource {
         data: {
           'email': email,
           'password': password,
-          'displayName': displayName,
+          'display_name': displayName,
         },
       );
       return _parseAuthResponse(response.data!);
